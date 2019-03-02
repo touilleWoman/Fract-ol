@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/01 10:18:57 by jleblond          #+#    #+#             */
-/*   Updated: 2019/03/01 10:27:03 by jleblond         ###   ########.fr       */
+/*   Created: 2019/03/02 11:00:33 by jleblond          #+#    #+#             */
+/*   Updated: 2019/03/02 11:00:41 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,21 @@ t_color				color_val_calculate(int val_cl)
 	return (cl);
 }
 
-void				put_pixel_with_cl(int i, t_context *pctx)
+void				put_pixel_with_cl(int x, int y, t_context *pctx, int iteration)
 {
 	t_color		cl;
 	int			val_cl;
+	int			i;
 
-	val_cl =120;
+	i = y * IMG_X + x;
+	val_cl = iteration * 2/* * 255 / MAX_ITERATION*/;
 	cl = color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
 	pctx->data_a[i * 4] = cl.b;
 }
 
-// int				get_pixel_val(int x, int y)
-// {
 
-// }
 
 int					window(t_context *pctx)
 {
@@ -77,35 +76,69 @@ int					window(t_context *pctx)
 
 }
 
-int					julia_calcu()
+//c 是复数
+int				mandelbrot_calcu(int x, int y)
 {
-	float	zx;
-	float	zy;
+	double	zx;
+	double	zy;
 	int		iteration;
-	float	xtemp;
+	float	temp;
+	//float	real_inter = 3 / IMG_X;
+	//float 	ima_inter = 2 / IMG_Y;
+	double	cx = (double)((x / 100) - 2.1);
+	double	cy = (double)((y / 100) - 1.2);
 
 	iteration = 0;
-	while (zx * zx + zy * zy < 4 && iteration < MAX_ITERATION)
-	{
-		xtemp = zx * zx - zy * zy;
-		zy = 2 * zx * zy  + cy;
-        zx = xtemp + cx;
-        iteration++;
-	}
-	return(iteration);
+	zx = 0;
+	zy = 0;
+	double limit = 0;
 
+	while ((iteration < MAX_ITERATION) && (limit < 4))
+	{
+		temp = zx;
+		zx = 	zx * zx - zy * zy + cx;
+		zy = 2 * zy * temp + cy;
+
+		// temp = ((zx * zx) - (zy * zy) + cx);
+		// zy = (2 * zx * zy) + cy;
+		// zx = temp;
+//		printf("%f| %f\n", zx, zy);
+		limit = (zx * zx) + (zy * zy);
+        iteration++;
+   	}
+  //  	if (iteration = MAX_ITERATION)
+		// printf("limit: %f iteration:%d\n", limit, iteration);
+	return (iteration);
 
 }
 
-void				julia(void)
+
+void			mandelbrot(void)
 {
 	t_context	ctx;
 	int			iteration;
 
 	window(&ctx);
-	iteration = pixtel_calcu();
-	printf("%d\n", iteration);
+	iteration = 0;
+	int		x = 0;
+	int		y = 0;
+	while (y < WIN_Y)
+	{
+		while (x < WIN_X)
+		{
+			iteration = mandelbrot_calcu(x, y);
+			if (iteration == MAX_ITERATION)
+			{
+				put_pixel_with_cl(x, y, &ctx, iteration);
 
+			}
+//			printf("x = %d , y = %d\n", x, y);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	mlx_put_image_to_window(ctx.mlx_ptr,ctx.win_ptr, ctx.img_ptr, 0, 0);
 	mlx_hook(ctx.win_ptr, 2, 0, key_press, &ctx);
 	mlx_loop(ctx.mlx_ptr);
 
@@ -124,7 +157,6 @@ int					key_press(int keycode, void *param)
 
 	// mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
 	// ft_bzero(pctx->data_a, (pctx->size_l) * WIN_Y);
-	// draw(pctx);
 	return (0);
 }
 

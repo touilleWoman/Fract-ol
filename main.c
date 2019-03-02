@@ -21,10 +21,10 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("usage...", 2);
 		return (0);
 	}
-	s1= "julia";
+	s1= "mandelbrot";
 	if (ft_strcmp(argv[1], s1) == 0)
 	{
-		julia();
+		mandelbrot();
 	}
 	return(0);
 }
