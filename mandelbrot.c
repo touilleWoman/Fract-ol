@@ -78,13 +78,11 @@ int				mandelbrot_calcu(int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
-	int		iteration;
-	double	temp;
-	//float	real_inter = 3 / IMG_X;
-	//float 	ima_inter = 2 / IMG_Y;
-	c.re = ((double)x / 100 - 2.1);
-	c.im = ((double)y / 100 - 1.2);
+	int			iteration;
+	double		temp;
 
+	c.re = ((double)x * 3 / IMG_X - 2);
+	c.im = ((double)y * 2 / IMG_Y - 1);
 	iteration = 0;
 	z.re = 0;
 	z.im = 0;

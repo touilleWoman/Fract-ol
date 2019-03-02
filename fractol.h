@@ -20,7 +20,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define MAX_ITERATION 20
+# define MAX_ITERATION 50
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
@@ -40,10 +40,10 @@
 # define KEYCODE_K 40
 # define KEYCODE_L 37
 # define KEYCODE_I 34
-# define WIN_X 270
-# define WIN_Y 240
-# define IMG_X 270
-# define IMG_Y 240
+# define WIN_X 800
+# define WIN_Y 600
+# define IMG_X 800
+# define IMG_Y 600
 # define WIN_NAME "fractol"
 
 typedef struct		s_context
