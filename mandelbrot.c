@@ -41,14 +41,14 @@ t_color				color_val_calculate(int val_cl)
 	return (cl);
 }
 
-void				put_pixel_with_cl(int x, int y, t_context *pctx, int iteration)
+void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 {
 	t_color		cl;
 	int			val_cl;
 	int			i;
 
 	i = y * IMG_X + x;
-	val_cl = iteration * 2/* * 255 / MAX_ITERATION*/;
+	val_cl = iteration * 360 / MAX_ITERATION;
 	cl = color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
@@ -82,11 +82,11 @@ int				mandelbrot_calcu(int x, int y)
 	double	zx;
 	double	zy;
 	int		iteration;
-	float	temp;
+	double	temp;
 	//float	real_inter = 3 / IMG_X;
 	//float 	ima_inter = 2 / IMG_Y;
-	double	cx = (double)((x / 100) - 2.1);
-	double	cy = (double)((y / 100) - 1.2);
+	double	cx = ((double)x / 100 - 2.1);
+	double	cy = ((double)y / 100 - 1.2);
 
 	iteration = 0;
 	zx = 0;
@@ -96,20 +96,20 @@ int				mandelbrot_calcu(int x, int y)
 	while ((iteration < MAX_ITERATION) && (limit < 4))
 	{
 		temp = zx;
-		zx = 	zx * zx - zy * zy + cx;
+		zx = zx * zx - zy * zy + cx;
 		zy = 2 * zy * temp + cy;
 
 		// temp = ((zx * zx) - (zy * zy) + cx);
 		// zy = (2 * zx * zy) + cy;
 		// zx = temp;
-//		printf("%f| %f\n", zx, zy);
+		printf("%f| %f\n", zx, zy);
 		limit = (zx * zx) + (zy * zy);
         iteration++;
-   	}
-  //  	if (iteration = MAX_ITERATION)
-		// printf("limit: %f iteration:%d\n", limit, iteration);
-	return (iteration);
+	//	printf("limit: %f iteration:%d\n", limit, iteration);
 
+   	}
+
+	return (iteration);
 }
 
 
@@ -127,12 +127,14 @@ void			mandelbrot(void)
 		while (x < WIN_X)
 		{
 			iteration = mandelbrot_calcu(x, y);
-			if (iteration == MAX_ITERATION)
+			//put_pixel_with_cl(x, y, &ctx, iteration);
+
+			if (iteration != MAX_ITERATION)
 			{
 				put_pixel_with_cl(x, y, &ctx, iteration);
-
+				printf("iteration:%d\n", iteration);
 			}
-//			printf("x = %d , y = %d\n", x, y);
+		//	printf("x = %d , y = %d, iteration=%d\n", x, y, iteration);
 			x++;
 		}
 		x = 0;

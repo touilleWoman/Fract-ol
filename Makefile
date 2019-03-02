@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-
+.PHONY: all clean fclean re
 
 CC = cc
 
@@ -28,14 +28,18 @@ LIBFTA = libft/libft.a
 
 INC = -I ./libft -I minilibx_macos
 
-all: $(OFILE) $(LIBFTA)
+all:$(NAME)
+
+$(NAME): $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE) $(LIBFTA) $(INC) -L minilibx_macos  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o: %.c $(HEADER)
+%.o: %.c $(HEADER) $(LIBFTA)
 	$(CC) $(CFLAGS) -c $(SOURCE) $(INC)
 
-$(LIBFTA):
+$(LIBFTA): FORCE
 	make -C ./libft
+
+FORCE:
 
 clean:
 	rm -f $(OFILE)
@@ -45,4 +49,4 @@ fclean: clean
 
 re:fclean all
 
-.PHONY: all clean fclean re
+

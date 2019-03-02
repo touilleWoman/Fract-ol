@@ -20,7 +20,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define MAX_ITERATION 50
+# define MAX_ITERATION 20
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
 # define KEYCODE_X 7

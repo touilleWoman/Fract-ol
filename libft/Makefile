@@ -30,7 +30,7 @@ ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstcpy.c \
 ft_word_nbr_counter.c ft_lstlen.c ft_islower.c ft_isupper.c \
 get_next_line.c ft_aatoii.c \
 
-HEADER = libft.h get_next_line.h
+HEADER = libft.h
 
 OFILE = $(SOURCE:.c=.o)
 

@@ -18,7 +18,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putendl_fd("usage...", 2);
+		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot)", 2);
 		return (0);
 	}
 	s1= "mandelbrot";
