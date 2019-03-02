@@ -54,6 +54,12 @@ typedef struct		s_context
 	void			*img_ptr;
 }					t_context;
 
+typedef struct 		s_complex
+{
+	double			re;
+	double			im;
+}					t_complex;
+
 typedef struct		s_color
 {
 	unsigned char	r;

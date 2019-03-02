@@ -55,8 +55,6 @@ void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 	pctx->data_a[i * 4] = cl.b;
 }
 
-
-
 int					window(t_context *pctx)
 {
 	int		bpp;
@@ -76,39 +74,27 @@ int					window(t_context *pctx)
 
 }
 
-//c 是复数
 int				mandelbrot_calcu(int x, int y)
 {
-	double	zx;
-	double	zy;
+	t_complex	z;
+	t_complex	c;
 	int		iteration;
 	double	temp;
 	//float	real_inter = 3 / IMG_X;
 	//float 	ima_inter = 2 / IMG_Y;
-	double	cx = ((double)x / 100 - 2.1);
-	double	cy = ((double)y / 100 - 1.2);
+	c.re = ((double)x / 100 - 2.1);
+	c.im = ((double)y / 100 - 1.2);
 
 	iteration = 0;
-	zx = 0;
-	zy = 0;
-	double limit = 0;
-
-	while ((iteration < MAX_ITERATION) && (limit < 4))
+	z.re = 0;
+	z.im = 0;
+	while ((iteration < MAX_ITERATION) && (z.re * z.re + z.im * z.im < 4))
 	{
-		temp = zx;
-		zx = zx * zx - zy * zy + cx;
-		zy = 2 * zy * temp + cy;
-
-		// temp = ((zx * zx) - (zy * zy) + cx);
-		// zy = (2 * zx * zy) + cy;
-		// zx = temp;
-		printf("%f| %f\n", zx, zy);
-		limit = (zx * zx) + (zy * zy);
+		temp = z.re;
+		z.re = z.re * z.re - z.im * z.im + c.re;
+		z.im = 2 * z.im * temp + c.im;
         iteration++;
-	//	printf("limit: %f iteration:%d\n", limit, iteration);
-
    	}
-
 	return (iteration);
 }
 
@@ -127,14 +113,10 @@ void			mandelbrot(void)
 		while (x < WIN_X)
 		{
 			iteration = mandelbrot_calcu(x, y);
-			//put_pixel_with_cl(x, y, &ctx, iteration);
-
 			if (iteration != MAX_ITERATION)
 			{
 				put_pixel_with_cl(x, y, &ctx, iteration);
-				printf("iteration:%d\n", iteration);
 			}
-		//	printf("x = %d , y = %d, iteration=%d\n", x, y, iteration);
 			x++;
 		}
 		x = 0;
