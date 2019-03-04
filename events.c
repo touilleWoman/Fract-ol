@@ -14,8 +14,8 @@
 
 void				reset(t_context *pctx)
 {
-	pctx->var_x = 0;
-	pctx->variation_cl = 0;
+	pctx->key.zoom = 1;
+	pctx->key.variation_cl = 0;
 }
 
 int					key_press(int keycode, void *param)
@@ -29,13 +29,13 @@ int					key_press(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == KEYCODE_Z)
-		pctx->var_x++;
+		pctx->key.zoom = pctx->key.zoom - 0.02;
 	if (keycode == KEYCODE_X)
-		pctx->var_x--;
+		pctx->key.zoom = pctx->key.zoom + 0.02;
 	if (keycode == KEYCODE_C)
-		pctx->variation_cl = pctx->variation_cl + 10;
+		pctx->key.variation_cl = pctx->key.variation_cl + 10;
 	if (keycode == KEYCODE_V)
-		pctx->variation_cl = pctx->variation_cl - 10;
+		pctx->key.variation_cl = pctx->key.variation_cl - 10;
 	if (keycode == KEYCODE_R)
 		reset(pctx);
 

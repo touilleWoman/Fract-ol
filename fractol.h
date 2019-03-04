@@ -41,29 +41,36 @@
 # define KEYCODE_K 40
 # define KEYCODE_L 37
 # define KEYCODE_I 34
-# define WIN_X 800
-# define WIN_Y 600
-# define IMG_X 800
-# define IMG_Y 600
+# define WIN_X 1200
+# define WIN_Y 800
+# define IMG_X 1200
+# define IMG_Y 800
 # define WIN_NAME "fractol"
 
-typedef struct		s_context
+
+typedef struct		s_key
 {
-	char			*data_a;
-	void			*mlx_ptr;
-	void			*win_ptr;
-	void			*img_ptr;
-	int				size_l;
-	int				var_x;
-	int				var_y;
+	float			zoom;
 	int				variation_cl;
-}					t_context;
+}					t_key;
 
 typedef struct 		s_complex
 {
 	double			re;
 	double			im;
 }					t_complex;
+
+typedef struct		s_context
+{
+
+	char			*data_a;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	int				size_l;
+	t_key			key;
+}					t_context;
+
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
 void			browse_pixel(t_context *pctx);

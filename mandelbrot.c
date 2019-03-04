@@ -20,7 +20,7 @@ void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 	int			i;
 
 	i = y * IMG_X + x;
-	val_cl = iteration * 360 / MAX_ITERATION + pctx->variation_cl;
+	val_cl = iteration * 360 / MAX_ITERATION + pctx->key.variation_cl;
 	cl = ft_color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
@@ -36,8 +36,8 @@ int				mandelbrot_calcu(int x, int y, t_context *pctx)
 	int			iteration;
 	double		temp;
 
-	c.re = ((double)x * 3 / IMG_X - 2 + pctx->var_x);
-	c.im = ((double)y * 2 / IMG_Y - 1 + pctx->var_y);
+	c.re = ((double)x * 3 * pctx->key.zoom / IMG_X - (2 * pctx->key.zoom));
+	c.im = ((double)y * 2 * pctx->key.zoom / IMG_Y - (1 * pctx->key.zoom ));
 	iteration = 0;
 	z.re = 0;
 	z.im = 0;
