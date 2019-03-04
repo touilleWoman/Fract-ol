@@ -18,7 +18,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = fractol
 
-SOURCE = main.c mandelbrot.c
+SOURCE = main.c mandelbrot.c events.c
 
 OFILE = $(SOURCE:.c=.o)
 

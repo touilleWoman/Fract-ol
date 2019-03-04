@@ -14,7 +14,7 @@
 # define FRACTOL_H
 
 # include "mlx.h"
-# include "libft/libft.h"
+# include "./libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -24,6 +24,7 @@
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
+# define KEYCODE_R 15
 # define KEYCODE_UP 126
 # define KEYCODE_DOWN 125
 # define KEYCODE_LEFT 123
@@ -52,6 +53,10 @@ typedef struct		s_context
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	int				size_l;
+	int				var_x;
+	int				var_y;
+	int				variation_cl;
 }					t_context;
 
 typedef struct 		s_complex
@@ -59,14 +64,8 @@ typedef struct 		s_complex
 	double			re;
 	double			im;
 }					t_complex;
-
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_color;
-
-void			mandelbrot(void);
+int					window(t_context *pctx);
+void				reset(t_context *pctx);
+void			browse_pixel(t_context *pctx);
 int		key_press(int keycode, void *param);
 #endif

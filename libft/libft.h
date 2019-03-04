@@ -28,6 +28,14 @@ typedef struct	s_fd_buf
 	char		*end;
 }				t_fd_buf;
 
+typedef struct	s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}				t_color;
+
+t_color			ft_color_val_calculate(int val_cl);
 void			*ft_memset(void	*str, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);

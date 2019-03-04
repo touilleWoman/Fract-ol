@@ -14,17 +14,17 @@
 
 int		main(int argc, char **argv)
 {
-	char	*s1;
+	t_context	ctx;
+
 
 	if (argc != 2)
 	{
 		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot)", 2);
 		return (0);
 	}
-	s1= "mandelbrot";
-	if (ft_strcmp(argv[1], s1) == 0)
+	if (ft_strcmp(argv[1], "mandelbrot") == 0)
 	{
-		mandelbrot();
+		window(&ctx);
 	}
 	return(0);
 }
