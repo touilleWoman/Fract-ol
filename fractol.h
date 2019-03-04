@@ -20,7 +20,9 @@
 # include <math.h>
 # include <fcntl.h>
 
+
 # define MAX_ITERATION 50
+# define MOUSE_LEFT 1
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
@@ -41,6 +43,10 @@
 # define KEYCODE_K 40
 # define KEYCODE_L 37
 # define KEYCODE_I 34
+# define MOUSE_LEFT 1
+# define MOUSE_UP 4
+# define MOUSE_DOWN 5
+# define MOUSE_LEFT 1
 # define WIN_X 1200
 # define WIN_Y 800
 # define IMG_X 1200
@@ -60,19 +66,30 @@ typedef struct 		s_complex
 	double			im;
 }					t_complex;
 
+typedef struct 		s_limit
+{
+	double			xmax;
+	double			xmin;
+	double			ymax;
+	double			ymin;
+}					t_limit;
+
 typedef struct		s_context
 {
-
+	t_key			key;
+	t_limit			limit;
 	char			*data_a;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
 	int				size_l;
-	t_key			key;
 }					t_context;
 
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
-void			browse_pixel(t_context *pctx);
-int		key_press(int keycode, void *param);
+void				browse_pixel(t_context *pctx);
+int					key_press(int keycode, void *param);
+int					mouse_move(int x, int y, void *param);
+
+int					closewindow(void *param);
 #endif

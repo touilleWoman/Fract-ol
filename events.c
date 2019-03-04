@@ -16,6 +16,11 @@ void				reset(t_context *pctx)
 {
 	pctx->key.zoom = 1;
 	pctx->key.variation_cl = 0;
+	pctx->limit.xmax = 1;
+	pctx->limit.xmin = -2;
+	pctx->limit.ymax = 1;
+	pctx->limit.ymin = -1;
+
 }
 
 int					key_press(int keycode, void *param)
@@ -45,5 +50,24 @@ int					key_press(int keycode, void *param)
 	browse_pixel(pctx);
 
 
+	return (0);
+}
+
+int				mouse_move(int x, int y, void *param)
+{
+	t_context *pctx;
+
+	pctx = (t_context *)param;
+	printf("x:%d  y:%d\n ", x, y );
+	return (0);
+}
+
+int				closewindow(void *param)
+{
+	t_context *pctx;
+
+	pctx = (t_context *)param;
+	mlx_destroy_window(pctx->mlx_ptr, pctx->win_ptr);
+	exit(0);
 	return (0);
 }
