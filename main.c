@@ -50,7 +50,7 @@ int				julia_calcu(int x, int y, t_context *pctx)
 	iteration = 0;
 	c.re = 0.285;
 	c.im = 0.01;
-	while ((iteration < MAX_ITERATION) && (z.re * z.re + z.im * z.im < 4))
+	while ((iteration < pctx->max_iteration) && (z.re * z.re + z.im * z.im < 4))
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;

@@ -20,7 +20,7 @@ void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 	int			i;
 
 	i = y * IMG_X + x;
-	val_cl = iteration * 360 / MAX_ITERATION + pctx->key.variation_cl;
+	val_cl = iteration * 360 / pctx->max_iteration + pctx->key.variation_cl;
 	cl = ft_color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
@@ -41,7 +41,7 @@ int				mandelbrot_calcu(int x, int y, t_context *pctx)
 	iteration = 0;
 	z.re = 0;
 	z.im = 0;
-	while ((iteration < MAX_ITERATION) && (z.re * z.re + z.im * z.im < 4))
+	while ((iteration < pctx->max_iteration) && (z.re * z.re + z.im * z.im < 4))
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -95,7 +95,7 @@ void			browse_pixel(t_context *pctx)
 			{
 				iteration = julia_calcu(x, y, pctx);
 			}
-			if (iteration != MAX_ITERATION)
+			if (iteration != pctx->max_iteration)
 			{
 				put_pixel_with_cl(x, y, pctx, iteration);
 			}

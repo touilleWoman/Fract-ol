@@ -21,7 +21,6 @@
 # include <fcntl.h>
 
 
-# define MAX_ITERATION 50
 # define MOUSE_LEFT 1
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
@@ -86,6 +85,7 @@ typedef struct		s_context
 	void			*img_ptr;
 	int				size_l;
 	int				choose;
+	int				max_iteration;
 }					t_context;
 
 int					window(t_context *pctx);
