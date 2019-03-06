@@ -22,6 +22,7 @@ void				reset(t_context *pctx)
 	pctx->limit.ymin = -1;
 	pctx->key.var_x = 0;
 	pctx->key.var_y = 0;
+	pctx->max_iteration = 50;
 
 }
 
@@ -72,6 +73,7 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.xmin = pctx->limit.xmin * 0.8;
 		pctx->limit.ymax = pctx->limit.ymax * 0.8;
 		pctx->limit.ymin = pctx->limit.ymin * 0.8;
+		pctx->max_iteration = pctx->max_iteration + 50;
 		x++;
 		y++;
 
@@ -83,6 +85,11 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.xmin = pctx->limit.xmin * b;
 		pctx->limit.ymax = pctx->limit.ymax * b;
 		pctx->limit.ymin = pctx->limit.ymin * b;
+		if (pctx->max_iteration >=100)
+		{
+			pctx->max_iteration = pctx->max_iteration - 50;
+
+		}
 		x++;
 		y++;
 

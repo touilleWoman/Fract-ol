@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
-
+# include <pthread.h>
 
 # define MOUSE_LEFT 1
 # define KEYCODE_ESC 53
