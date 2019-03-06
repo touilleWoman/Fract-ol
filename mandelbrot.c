@@ -87,7 +87,14 @@ void			browse_pixel(t_context *pctx)
 	{
 		while (x < WIN_X)
 		{
-			iteration = mandelbrot_calcu(x, y, pctx);
+			if (pctx->choose == 1)
+			{
+				iteration = mandelbrot_calcu(x, y, pctx);
+			}
+			if (pctx->choose == 2)
+			{
+				iteration = julia_calcu(x, y, pctx);
+			}
 			if (iteration != MAX_ITERATION)
 			{
 				put_pixel_with_cl(x, y, pctx, iteration);
@@ -98,7 +105,6 @@ void			browse_pixel(t_context *pctx)
 		y++;
 	}
 	mlx_put_image_to_window(pctx->mlx_ptr,pctx->win_ptr, pctx->img_ptr, 0, 0);
-
 
 }
 

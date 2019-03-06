@@ -85,13 +85,15 @@ typedef struct		s_context
 	void			*win_ptr;
 	void			*img_ptr;
 	int				size_l;
+	int				choose;
 }					t_context;
 
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
-void				browse_pixel(t_context *pctx);
+void			browse_pixel(t_context *pctx);
 int					key_press(int keycode, void *param);
 // int					mouse_move(int x, int y, void *param);
 int				mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
+int				julia_calcu(int x, int y, t_context *pctx);
 #endif

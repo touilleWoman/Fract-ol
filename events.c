@@ -68,27 +68,23 @@ int				mouse_press(int button, int x, int y, void *param)
 	pctx = (t_context *)param;
 	if (button == MOUSE_UP)
 	{
-		pctx->limit.xmax = pctx->limit.xmax * 0.1;
-		pctx->limit.xmin = pctx->limit.xmin * 0.1;
-		pctx->limit.ymax = pctx->limit.ymax * 0.1;
-		pctx->limit.ymin = pctx->limit.ymin * 0.1;
+		pctx->limit.xmax = pctx->limit.xmax * 0.8;
+		pctx->limit.xmin = pctx->limit.xmin * 0.8;
+		pctx->limit.ymax = pctx->limit.ymax * 0.8;
+		pctx->limit.ymin = pctx->limit.ymin * 0.8;
 		x++;
 		y++;
-		// pctx->key.var_x = (IMG_X - x) * 4 / IMG_X;
-		// pctx->key.var_y = (IMG_Y - y) * 2 / IMG_Y;
+
 	}
 	if (button == MOUSE_DOWN )
 	{
-		b = 10;
+		b = 1.25;
 		pctx->limit.xmax = pctx->limit.xmax * b;
 		pctx->limit.xmin = pctx->limit.xmin * b;
 		pctx->limit.ymax = pctx->limit.ymax * b;
 		pctx->limit.ymin = pctx->limit.ymin * b;
-
-		// pctx->limit.xmax = pctx->limit.xmax * b + (xx * b - xx);
-		// pctx->limit.xmin = pctx->limit.xmin * b - (xx * b - xx);
-		// pctx->limit.ymax = pctx->limit.ymax * b + (yy * b - yy);
-		// pctx->limit.ymin = pctx->limit.ymin * b - (yy * b - yy);
+		x++;
+		y++;
 
 	}
 	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
