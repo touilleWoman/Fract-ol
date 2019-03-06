@@ -48,9 +48,9 @@
 # define MOUSE_DOWN 5
 # define MOUSE_LEFT 1
 # define WIN_X 1200
-# define WIN_Y 800
+# define WIN_Y 600
 # define IMG_X 1200
-# define IMG_Y 800
+# define IMG_Y 600
 # define WIN_NAME "fractol"
 
 
@@ -58,6 +58,8 @@ typedef struct		s_key
 {
 	float			zoom;
 	int				variation_cl;
+	float			var_x;
+	float			var_y;
 }					t_key;
 
 typedef struct 		s_complex
@@ -89,7 +91,7 @@ int					window(t_context *pctx);
 void				reset(t_context *pctx);
 void				browse_pixel(t_context *pctx);
 int					key_press(int keycode, void *param);
-int					mouse_move(int x, int y, void *param);
-
+// int					mouse_move(int x, int y, void *param);
+int				mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
 #endif

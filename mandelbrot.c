@@ -36,8 +36,8 @@ int				mandelbrot_calcu(int x, int y, t_context *pctx)
 	int			iteration;
 	double		temp;
 
-	c.re = ((double)x * (pctx->limit.xmax - pctx->limit.xmin) * pctx->key.zoom / IMG_X + pctx->limit.xmin * pctx->key.zoom);
-	c.im = ((double)y * 2 * pctx->key.zoom / IMG_Y - (1 * pctx->key.zoom ));
+	c.re = ((double)x * (pctx->limit.xmax - pctx->limit.xmin) / IMG_X + pctx->limit.xmin  + pctx->key.var_x);
+	c.im = ((double)y * (pctx->limit.ymax - pctx->limit.ymin) / IMG_Y + pctx->limit.ymin + pctx->key.var_y);
 	iteration = 0;
 	z.re = 0;
 	z.im = 0;
@@ -70,7 +70,7 @@ int					window(t_context *pctx)
 	browse_pixel(pctx);
 	mlx_hook(pctx->win_ptr, 2, 0, key_press, pctx);
 	mlx_hook(pctx->win_ptr, 17, 0, closewindow, pctx);
-	mlx_hook(pctx->win_ptr, 6, 0, mouse_move, pctx);
+	mlx_hook(pctx->win_ptr, 4, 0, mouse_press, pctx);
 	mlx_loop(pctx->mlx_ptr);
 	return (0);
 
