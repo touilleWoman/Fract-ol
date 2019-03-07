@@ -64,9 +64,9 @@ int					key_press(int keycode, void *param)
 int				mouse_press(int button, int x, int y, void *param)
 {
 	t_context *pctx;
-	float		b;
 
 	pctx = (t_context *)param;
+
 	if (button == MOUSE_UP)
 	{
 		pctx->limit.x2 = pctx->limit.x2 * 0.8;
@@ -78,9 +78,10 @@ int				mouse_press(int button, int x, int y, void *param)
 		y++;
 
 	}
+
 	if (button == MOUSE_DOWN )
 	{
-		b = 1.25;
+		float b = 1.25;
 		pctx->limit.x2 = pctx->limit.x2 * b;
 		pctx->limit.x1 = pctx->limit.x1 * b;
 		pctx->limit.y2 = pctx->limit.y2 * b;
