@@ -86,8 +86,8 @@ int				mouse_press(int button, int x, int y, void *param)
 	double ypmin = pctx->limit.y1;
 	double ypmax = pctx->limit.y2;
 
-	double xd = (xpmax - xpmin) / 30;
-	double yd = (ypmax - ypmin) / 30;
+	double xd = (xpmax - xpmin) / 20;
+	double yd = (ypmax - ypmin) / 20;
 
 
 	// double xmed = (xpmax - xpmin) / 2 + xpmin;
@@ -104,22 +104,29 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.x1 += xd;
 		pctx->limit.x2 -= xd;
 		pctx->limit.y1 += yd;
-		pctx->limit.y2 -= yd;
-		// pctx->max_iteration +=10;
+		pctx->limit.y2 -= yd;		
+		// pctx->limit.x1 = xp - 0.2;
+		// pctx->limit.x2 = xp + 0.2;
+		// pctx->limit.y1 = yp - 0.1 ;
+		// pctx->limit.y2 = yp + 0.1;
+		// pctx->max_iteration +=50;
 
 	}
 
 	if (button == MOUSE_DOWN )
 	{
+		// pctx->limit.x1 = xp - 0.4;
+		// pctx->limit.x2 = xp + 0.4;
+		// pctx->limit.y1 = yp - 0.2;
+		// pctx->limit.y2 = yp + 0.2;
 		pctx->limit.x1 -= xd;
 		pctx->limit.x2 += xd;
 		pctx->limit.y1 -= yd;
 		pctx->limit.y2 += yd;
-		// if (pctx->max_iteration >=60)
-		// {
-		// 	pctx->max_iteration = pctx->max_iteration - 10;
-
-		// }
+		if (pctx->max_iteration >=100)
+		{
+			pctx->max_iteration = pctx->max_iteration - 50;
+		}
 
 	}
 	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);

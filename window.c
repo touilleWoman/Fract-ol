@@ -104,13 +104,11 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 		{
 			p = normalize_pixel(x, y, pctx);	
 			if (pctx->choose == 1)
-			{
 				iteration = mandelbrot_calcu(p, pctx);
-			}
 			if (pctx->choose == 2)
-			{
 				iteration = julia_calcu(p, pctx);
-			}
+			if (pctx->choose == 3)
+				iteration = burningship_calcu(p, pctx);
 			if (iteration != pctx->max_iteration)
 			{
 				put_pixel_with_cl(x, y, pctx, iteration);

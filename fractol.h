@@ -97,5 +97,9 @@ void				sub_browse_pixel(t_context *pctx, int xmin, int xmax);
 int					julia_calcu(t_complex p, t_context *pctx);
 int					mandelbrot_calcu(t_complex p, t_context *pctx);
 void				thread(t_context *pctx);
+double				abs_double(double a);
+int				burningship_calcu(t_complex p, t_context *pctx);
+
+
 
 #endif

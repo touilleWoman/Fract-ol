@@ -32,6 +32,11 @@ int		main(int argc, char **argv)
 		ctx.choose = 2;
 		window(&ctx);
 	}
+	if (ft_strcmp(argv[1], "burningship") == 0)
+	{
+		ctx.choose = 3;
+		window(&ctx);
+	}
 	else
 		ft_putendl_fd("fractal name wrong", 2);
 	return(0);
