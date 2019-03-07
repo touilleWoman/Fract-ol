@@ -81,6 +81,8 @@ int				mouse_press(int button, int x, int y, void *param)
 	p = normalize_pixel(x, y, pctx);
 	xp = p.re;
 	yp = p.im;
+	pctx->julia.re = xp;
+	pctx->julia.im = yp;
 
 	double xd = (pctx->limit.x2 - pctx->limit.x1) / 20;
 	double yd = (pctx->limit.y2 - pctx->limit.y1) / 20;

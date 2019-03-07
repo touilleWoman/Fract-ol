@@ -76,6 +76,7 @@ typedef struct		s_context
 	int				choose;
 	int				max_iteration;
 	int				variation_cl;
+	t_complex		julia;
 }					t_context;
 
 
