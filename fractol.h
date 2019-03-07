@@ -45,7 +45,7 @@
 # define MOUSE_UP 4
 # define MOUSE_DOWN 5
 # define MOUSE_LEFT 1
-# define WIN_X 1200
+# define WIN_X 800
 # define WIN_Y 600
 # define WIN_NAME "fractol"
 
@@ -98,7 +98,7 @@ int					julia_calcu(t_complex p, t_context *pctx);
 int					mandelbrot_calcu(t_complex p, t_context *pctx);
 void				thread(t_context *pctx);
 double				abs_double(double a);
-int				burningship_calcu(t_complex p, t_context *pctx);
+int				burningship_calcu(t_complex p, t_context *pctx);	
 
 
 
