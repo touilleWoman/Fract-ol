@@ -85,15 +85,25 @@ typedef struct		s_context
 	int				max_iteration;
 }					t_context;
 
+
+typedef struct 		s_params
+{
+	t_context		*pctx;
+	int				xmin;
+	int				xmax;
+} 					t_params;
+	
+t_complex		normalize_pixel(int x, int y, t_context *pctx);
+
+void				*start_routine(void *raw_params);
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
 void				browse_pixel(t_context *pctx);
 int					key_press(int keycode, void *param);
 int					mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
-int					julia_calcu(int x, int y, t_context *pctx);
-int					mandelbrot_calcu(int x, int y, t_context *pctx);
 void				sub_browse_pixel(t_context *pctx, int xmin, int xmax);
-
+int					julia_calcu(t_complex p, t_context *pctx);
+int					mandelbrot_calcu(t_complex p, t_context *pctx);
 
 #endif

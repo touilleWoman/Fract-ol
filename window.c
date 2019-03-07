@@ -54,41 +54,31 @@ int					window(t_context *pctx)
 
 }
 
-
-
-
-typedef struct s_params
-{
-	t_context *pctx;
-	int			 xmin;
-	int			 xmax;
-} 			t_params;
-
 void			*start_routine(void *raw_params) 
 {
 	t_params *params = (t_params*)raw_params;
 	sub_browse_pixel(params->pctx, params->xmin, params->xmax);
-	return NULL;
+	return (NULL);
 }
+
 
 void			browse_pixel(t_context *pctx)
 {
-	int curr_thread;
-	int slice_x;
-	pthread_t threads[4];
-	t_params params[4];
+	int				curr_thread;
+	int				slice_x;
+	pthread_t		threads[4];
+	t_params		params[4];
 
 	curr_thread = 0;
 	slice_x = WIN_X / 4;
 	while (curr_thread < 4)
 	{
-		params[curr_thread].pctx=pctx;
-		params[curr_thread].xmin=curr_thread * slice_x;
-		params[curr_thread].xmax=(curr_thread + 1) * slice_x;
+		params[curr_thread].pctx = pctx;
+		params[curr_thread].xmin = curr_thread * slice_x;
+		params[curr_thread].xmax = (curr_thread + 1) * slice_x;
 		pthread_create(&threads[curr_thread], NULL, start_routine, &params[curr_thread]);
 		curr_thread++;
 	}
-
 	curr_thread = 0;
 	while (curr_thread < 4)
 	{
@@ -99,26 +89,30 @@ void			browse_pixel(t_context *pctx)
 
 }
 
+
 void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 {
 	int			iteration;
 	int			y;
+	int			x;
+	t_complex	p;
 
 	y = 0;
 	iteration = 0;
-	int		x = xmin;
+	x = xmin;
 
 	while (y < WIN_Y)
 	{
 		while (x < xmax)
 		{
+			p = normalize_pixel(x, y, pctx);	
 			if (pctx->choose == 1)
 			{
-				iteration = mandelbrot_calcu(x, y, pctx);
+				iteration = mandelbrot_calcu(p, pctx);
 			}
 			if (pctx->choose == 2)
 			{
-				iteration = julia_calcu(x, y, pctx);
+				iteration = julia_calcu(p, pctx);
 			}
 			if (iteration != pctx->max_iteration)
 			{
@@ -134,8 +128,14 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 
 
 
+t_complex		normalize_pixel(int x, int y, t_context *pctx)
+{
+	t_complex	p;
 
-
+	p.re = (x * (pctx->limit.x2 - pctx->limit.x1) / WIN_X + pctx->limit.x1);
+	p.im = (y * (pctx->limit.y2 - pctx->limit.y1) / WIN_Y + pctx->limit.y1);
+	return (p);
+}
 
 
 
