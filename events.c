@@ -101,14 +101,14 @@ int				mouse_press(int button, int x, int y, void *param)
 	if (button == MOUSE_UP)
 	{
 
-		pctx->limit.x1 += xd;
-		pctx->limit.x2 -= xd;
-		pctx->limit.y1 += yd;
-		pctx->limit.y2 -= yd;		
-		// pctx->limit.x1 = xp - 0.2;
-		// pctx->limit.x2 = xp + 0.2;
-		// pctx->limit.y1 = yp - 0.1 ;
-		// pctx->limit.y2 = yp + 0.1;
+		// pctx->limit.x1 += xd;
+		// pctx->limit.x2 -= xd;
+		// pctx->limit.y1 += yd;
+		// pctx->limit.y2 -= yd;		
+		pctx->limit.x1 = xp - 0.2;
+		pctx->limit.x2 = xp + 0.2;
+		pctx->limit.y1 = yp - 0.1 ;
+		pctx->limit.y2 = yp + 0.1;
 		// pctx->max_iteration +=50;
 
 	}
