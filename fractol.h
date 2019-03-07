@@ -69,10 +69,10 @@ typedef struct 		s_complex
 
 typedef struct 		s_limit
 {
-	double			xmax;
-	double			xmin;
-	double			ymax;
-	double			ymin;
+	double			x2;
+	double			x1;
+	double			y2;
+	double			y1;
 }					t_limit;
 
 typedef struct		s_context
@@ -96,4 +96,6 @@ int					key_press(int keycode, void *param);
 int				mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
 int				julia_calcu(int x, int y, t_context *pctx);
+int				mandelbrot_calcu(int x, int y, t_context *pctx);
+
 #endif

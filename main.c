@@ -38,24 +38,4 @@ int		main(int argc, char **argv)
 
 
 
-int				julia_calcu(int x, int y, t_context *pctx)
-{
-	t_complex	z;
-	t_complex	c;
-	int			iteration;
-	double		temp;
 
-	z.re = ((double)x * (pctx->limit.xmax - pctx->limit.xmin) / IMG_X + pctx->limit.xmin  + pctx->key.var_x);
-	z.im = ((double)y * (pctx->limit.ymax - pctx->limit.ymin) / IMG_Y + pctx->limit.ymin + pctx->key.var_y);
-	iteration = 0;
-	c.re = 0.285;
-	c.im = 0.01;
-	while ((iteration < pctx->max_iteration) && (z.re * z.re + z.im * z.im < 4))
-	{
-		temp = z.re;
-		z.re = z.re * z.re - z.im * z.im + c.re;
-		z.im = 2 * z.im * temp + c.im;
-        iteration++;
-   	}
-	return (iteration);
-}
