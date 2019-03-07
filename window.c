@@ -54,16 +54,64 @@ int					window(t_context *pctx)
 
 }
 
+
+void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax);
+
+typedef struct {
+	t_context *pctx;
+	int xmin;
+	int xmax;
+	int ymin;
+	int ymax;
+} t_params;
+
+void *start_routine(void *raw_params) {
+	t_params *params = (t_params*)raw_params;
+	sub_browse_pixel(params->pctx, params->xmin, params->xmax, params->ymin, params->ymax);
+	return NULL;
+}
+
 void			browse_pixel(t_context *pctx)
+{
+	int nb_threads = 4;
+	int curr_thread = 0;
+	int slice_x = WIN_X / nb_threads;
+	pthread_t threads[nb_threads];
+	t_params params[nb_threads];
+
+	while (curr_thread < nb_threads)
+	{
+		params[curr_thread].pctx=pctx;
+		params[curr_thread].xmin=curr_thread * slice_x;
+		params[curr_thread].xmax=(curr_thread + 1) * slice_x;
+		params[curr_thread].ymin=0;
+		params[curr_thread].ymax=WIN_Y;
+		pthread_create(&threads[curr_thread], NULL, start_routine, &params[curr_thread]);
+		curr_thread++;
+	}
+
+	curr_thread = 0;
+	while (curr_thread < nb_threads)
+	{
+		pthread_join(threads[curr_thread], NULL);
+		curr_thread++;
+	}
+	mlx_put_image_to_window(pctx->mlx_ptr,pctx->win_ptr, pctx->img_ptr, 0, 0);
+
+}
+
+void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax)
 {
 	int			iteration;
 
+
 	iteration = 0;
-	int		x = 0;
-	int		y = 0;
-	while (y < WIN_Y)
+	int		x = xmin;
+	int		y = ymin;
+
+	while (y < ymax)
 	{
-		while (x < WIN_X)
+		while (x < xmax)
 		{
 			if (pctx->choose == 1)
 			{
@@ -82,7 +130,6 @@ void			browse_pixel(t_context *pctx)
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(pctx->mlx_ptr,pctx->win_ptr, pctx->img_ptr, 0, 0);
 
 }
 
