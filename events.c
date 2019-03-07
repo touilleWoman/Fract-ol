@@ -65,7 +65,6 @@ int				mouse_press(int button, int x, int y, void *param)
 {
 	t_context *pctx;
 	float		b;
-	float		h = 10;
 
 	pctx = (t_context *)param;
 	if (button == MOUSE_UP)
@@ -75,12 +74,8 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.ymax = pctx->limit.ymax * 0.8;
 		pctx->limit.ymin = pctx->limit.ymin * 0.8;
 		pctx->max_iteration = pctx->max_iteration + 50;
-		double temp = pctx->limit.xmax;
-		double temp2 =pctx->limit.ymax;
-		pctx->limit.xmax = ((double)x * (pctx->limit.xmax - pctx->limit.xmin) / IMG_X + pctx->limit.xmin  + pctx->key.var_x) + h;
-		pctx->limit.xmin = ((double)x * (temp - pctx->limit.xmin) / IMG_X + pctx->limit.xmin  + pctx->key.var_x) - h;
-		pctx->limit.ymax =  ((double)y * (pctx->limit.ymax - pctx->limit.ymin) / IMG_Y + pctx->limit.ymin + pctx->key.var_y) + h;
-		pctx->limit.ymin =  ((double)y * (temp2 - pctx->limit.ymin) / IMG_Y + pctx->limit.ymin + pctx->key.var_y) - h;
+		x++;
+		y++;
 
 	}
 	if (button == MOUSE_DOWN )
@@ -90,7 +85,6 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.xmin = pctx->limit.xmin * b;
 		pctx->limit.ymax = pctx->limit.ymax * b;
 		pctx->limit.ymin = pctx->limit.ymin * b;
-
 		if (pctx->max_iteration >=100)
 		{
 			pctx->max_iteration = pctx->max_iteration - 50;

@@ -17,7 +17,6 @@ int		main(int argc, char **argv)
 	t_context	ctx;
 
 
-
 	if (argc != 2)
 	{
 		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot)", 2);
@@ -36,7 +35,6 @@ int		main(int argc, char **argv)
 	}
 	return(0);
 }
-
 
 
 
