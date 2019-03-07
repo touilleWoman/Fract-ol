@@ -19,7 +19,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot)", 2);
+		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot; julia)", 2);
 		return (0);
 	}
 	if (ft_strcmp(argv[1], "mandelbrot") == 0)
@@ -27,12 +27,13 @@ int		main(int argc, char **argv)
 		ctx.choose = 1;
 		window(&ctx);
 	}
-
 	if (ft_strcmp(argv[1], "julia") == 0)
 	{
 		ctx.choose = 2;
 		window(&ctx);
 	}
+	else
+		ft_putendl_fd("fractal name wrong", 2);
 	return(0);
 }
 

@@ -19,7 +19,7 @@ void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 	int			val_cl;
 	int			i;
 
-	i = y * IMG_X + x;
+	i = y * WIN_X + x;
 	val_cl = iteration * 360 / pctx->max_iteration + pctx->key.variation_cl;
 	cl = ft_color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
@@ -41,7 +41,7 @@ int					window(t_context *pctx)
 	pctx->win_ptr = mlx_new_window(pctx->mlx_ptr, WIN_X, WIN_Y, WIN_NAME);
 	if (pctx->win_ptr == NULL)
 		return (-1);
-	pctx->img_ptr = mlx_new_image(pctx->mlx_ptr, IMG_X, IMG_Y);
+	pctx->img_ptr = mlx_new_image(pctx->mlx_ptr, WIN_X, WIN_Y);
 	pctx->data_a = mlx_get_data_addr(pctx->img_ptr, &bpp,
 		 &pctx->size_l, &endian);
 
@@ -55,7 +55,7 @@ int					window(t_context *pctx)
 }
 
 
-void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax);
+
 
 typedef struct {
 	t_context *pctx;
@@ -65,7 +65,8 @@ typedef struct {
 	int ymax;
 } t_params;
 
-void *start_routine(void *raw_params) {
+void			*start_routine(void *raw_params) 
+{
 	t_params *params = (t_params*)raw_params;
 	sub_browse_pixel(params->pctx, params->xmin, params->xmax, params->ymin, params->ymax);
 	return NULL;
@@ -73,13 +74,16 @@ void *start_routine(void *raw_params) {
 
 void			browse_pixel(t_context *pctx)
 {
-	int nb_threads = 4;
-	int curr_thread = 0;
-	int slice_x = WIN_X / nb_threads;
-	pthread_t threads[nb_threads];
-	t_params params[nb_threads];
+	int nb_threads;
+	int curr_thread;
+	int slice_x;
+	pthread_t threads[4];
+	t_params params[4];
 
-	while (curr_thread < nb_threads)
+	nb_threads = 4;
+	curr_thread = 0;
+	slice_x = WIN_X / nb_threads;
+	while (curr_thread < 4)
 	{
 		params[curr_thread].pctx=pctx;
 		params[curr_thread].xmin=curr_thread * slice_x;
@@ -130,6 +134,16 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax)
 		x = 0;
 		y++;
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
 

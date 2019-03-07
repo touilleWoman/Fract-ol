@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include <pthread.h>
 
-# define MOUSE_LEFT 1
 # define KEYCODE_ESC 53
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
@@ -48,8 +47,6 @@
 # define MOUSE_LEFT 1
 # define WIN_X 1200
 # define WIN_Y 600
-# define IMG_X 1200
-# define IMG_Y 600
 # define WIN_NAME "fractol"
 
 
@@ -61,7 +58,7 @@ typedef struct		s_key
 	float			var_y;
 }					t_key;
 
-typedef struct 		s_complex
+typedef struct		s_complex
 {
 	double			re;
 	double			im;
@@ -90,12 +87,12 @@ typedef struct		s_context
 
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
-void			browse_pixel(t_context *pctx);
+void				browse_pixel(t_context *pctx);
 int					key_press(int keycode, void *param);
-// int					mouse_move(int x, int y, void *param);
-int				mouse_press(int button, int x, int y, void *param);
+int					mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
-int				julia_calcu(int x, int y, t_context *pctx);
-int				mandelbrot_calcu(int x, int y, t_context *pctx);
+int					julia_calcu(int x, int y, t_context *pctx);
+int					mandelbrot_calcu(int x, int y, t_context *pctx);
+void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax);
 
 #endif
