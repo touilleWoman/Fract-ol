@@ -20,14 +20,12 @@ void				put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
 	int			i;
 
 	i = y * WIN_X + x;
-	val_cl = iteration * 360 / pctx->max_iteration + pctx->key.variation_cl;
+	val_cl = iteration * 360 / pctx->max_iteration + pctx->variation_cl;
 	cl = ft_color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
 	pctx->data_a[i * 4] = cl.b;
 }
-
-
 
 int					window(t_context *pctx)
 {
@@ -45,7 +43,7 @@ int					window(t_context *pctx)
 	pctx->data_a = mlx_get_data_addr(pctx->img_ptr, &bpp,
 		 &pctx->size_l, &endian);
 
-	browse_pixel(pctx);
+	thread(pctx);
 	mlx_hook(pctx->win_ptr, 2, 0, key_press, pctx);
 	mlx_hook(pctx->win_ptr, 17, 0, closewindow, pctx);
 	mlx_hook(pctx->win_ptr, 4, 0, mouse_press, pctx);
@@ -62,7 +60,7 @@ void			*start_routine(void *raw_params)
 }
 
 
-void			browse_pixel(t_context *pctx)
+void			thread(t_context *pctx)
 {
 	int				curr_thread;
 	int				slice_x;
@@ -88,7 +86,6 @@ void			browse_pixel(t_context *pctx)
 	mlx_put_image_to_window(pctx->mlx_ptr,pctx->win_ptr, pctx->img_ptr, 0, 0);
 
 }
-
 
 void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 {
@@ -125,9 +122,6 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 	}
 }
 
-
-
-
 t_complex		normalize_pixel(int x, int y, t_context *pctx)
 {
 	t_complex	p;
@@ -136,9 +130,6 @@ t_complex		normalize_pixel(int x, int y, t_context *pctx)
 	p.im = (y * (pctx->limit.y2 - pctx->limit.y1) / WIN_Y + pctx->limit.y1);
 	return (p);
 }
-
-
-
 
 
 

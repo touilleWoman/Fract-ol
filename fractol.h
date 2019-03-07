@@ -50,13 +50,6 @@
 # define WIN_NAME "fractol"
 
 
-typedef struct		s_key
-{
-	float			zoom;
-	int				variation_cl;
-	float			var_x;
-	float			var_y;
-}					t_key;
 
 typedef struct		s_complex
 {
@@ -74,7 +67,6 @@ typedef struct 		s_limit
 
 typedef struct		s_context
 {
-	t_key			key;
 	t_limit			limit;
 	char			*data_a;
 	void			*mlx_ptr;
@@ -83,6 +75,7 @@ typedef struct		s_context
 	int				size_l;
 	int				choose;
 	int				max_iteration;
+	int				variation_cl;
 }					t_context;
 
 
@@ -93,17 +86,16 @@ typedef struct 		s_params
 	int				xmax;
 } 					t_params;
 	
-t_complex		normalize_pixel(int x, int y, t_context *pctx);
-
+t_complex			normalize_pixel(int x, int y, t_context *pctx);
 void				*start_routine(void *raw_params);
 int					window(t_context *pctx);
 void				reset(t_context *pctx);
-void				browse_pixel(t_context *pctx);
 int					key_press(int keycode, void *param);
 int					mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
 void				sub_browse_pixel(t_context *pctx, int xmin, int xmax);
 int					julia_calcu(t_complex p, t_context *pctx);
 int					mandelbrot_calcu(t_complex p, t_context *pctx);
+void				thread(t_context *pctx);
 
 #endif
