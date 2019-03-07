@@ -57,45 +57,40 @@ int					window(t_context *pctx)
 
 
 
-typedef struct {
+typedef struct s_params
+{
 	t_context *pctx;
-	int xmin;
-	int xmax;
-	int ymin;
-	int ymax;
-} t_params;
+	int			 xmin;
+	int			 xmax;
+} 			t_params;
 
 void			*start_routine(void *raw_params) 
 {
 	t_params *params = (t_params*)raw_params;
-	sub_browse_pixel(params->pctx, params->xmin, params->xmax, params->ymin, params->ymax);
+	sub_browse_pixel(params->pctx, params->xmin, params->xmax);
 	return NULL;
 }
 
 void			browse_pixel(t_context *pctx)
 {
-	int nb_threads;
 	int curr_thread;
 	int slice_x;
 	pthread_t threads[4];
 	t_params params[4];
 
-	nb_threads = 4;
 	curr_thread = 0;
-	slice_x = WIN_X / nb_threads;
+	slice_x = WIN_X / 4;
 	while (curr_thread < 4)
 	{
 		params[curr_thread].pctx=pctx;
 		params[curr_thread].xmin=curr_thread * slice_x;
 		params[curr_thread].xmax=(curr_thread + 1) * slice_x;
-		params[curr_thread].ymin=0;
-		params[curr_thread].ymax=WIN_Y;
 		pthread_create(&threads[curr_thread], NULL, start_routine, &params[curr_thread]);
 		curr_thread++;
 	}
 
 	curr_thread = 0;
-	while (curr_thread < nb_threads)
+	while (curr_thread < 4)
 	{
 		pthread_join(threads[curr_thread], NULL);
 		curr_thread++;
@@ -104,16 +99,16 @@ void			browse_pixel(t_context *pctx)
 
 }
 
-void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax)
+void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 {
 	int			iteration;
+	int			y;
 
-
+	y = 0;
 	iteration = 0;
 	int		x = xmin;
-	int		y = ymin;
 
-	while (y < ymax)
+	while (y < WIN_Y)
 	{
 		while (x < xmax)
 		{
@@ -131,7 +126,7 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax)
 			}
 			x++;
 		}
-		x = 0;
+		x = xmin;
 		y++;
 	}
 }

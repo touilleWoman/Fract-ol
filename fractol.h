@@ -93,6 +93,7 @@ int					mouse_press(int button, int x, int y, void *param);
 int					closewindow(void *param);
 int					julia_calcu(int x, int y, t_context *pctx);
 int					mandelbrot_calcu(int x, int y, t_context *pctx);
-void			sub_browse_pixel(t_context *pctx, int xmin, int xmax, int ymin, int ymax);
+void				sub_browse_pixel(t_context *pctx, int xmin, int xmax);
+
 
 #endif
