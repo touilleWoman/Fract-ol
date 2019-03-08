@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void				reset(t_context *pctx)
+void			reset(t_context *pctx)
 {
 	pctx->variation_cl = 0;
 	pctx->limit.x2 = 2;
@@ -23,67 +23,10 @@ void				reset(t_context *pctx)
 	pctx->stop_mouse = 0;
 }
 
-int					key_press(int keycode, void *param)
+int				mouse_press(int button, int x, int y, void *param)
 {
 	t_context	*pctx;
-
-
-	pctx = (t_context *)param;
-	if (keycode == KEYCODE_ESC)
-	{
-		mlx_destroy_window(pctx->mlx_ptr, pctx->win_ptr);
-		exit(0);
-	}
-	key_press2(keycode, pctx);
-	if (keycode == KEYCODE_C)
-		pctx->variation_cl = pctx->variation_cl + 10;
-	if (keycode == KEYCODE_V)
-		pctx->variation_cl = pctx->variation_cl - 10;
-	if (keycode == KEYCODE_R)
-		reset(pctx);
-	if (keycode == KEYCODE_Z)
-		pctx->stop_mouse = 1;
-	if (keycode == KEYCODE_X)
-		pctx->stop_mouse = 0;
-	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
-	ft_bzero(pctx->data_a, (pctx->size_l) * WIN_Y);
-	thread(pctx);
-	return (0);
-}
-
-void				key_press2(int keycode, t_context *pctx)
-{
-	double		xd;
-	double		yd;
-
-	xd = (pctx->limit.x2 - pctx->limit.x1) / 10;
-	yd = (pctx->limit.y2 - pctx->limit.y1) / 10;
-	if (keycode == KEYCODE_RIGHT)
-	{
-		pctx->limit.x1 += xd;
-		pctx->limit.x2 += xd;
-	}
-	if (keycode == KEYCODE_LEFT)
-	{
-		pctx->limit.x1 -= xd;
-		pctx->limit.x2 -= xd;
-	}
-	if (keycode == KEYCODE_DOWN)
-	{
-		pctx->limit.y1 += yd;
-		pctx->limit.y2 += yd;
-	}
-	if (keycode == KEYCODE_UP)
-	{
-		pctx->limit.y1 -= yd;
-		pctx->limit.y2 -= yd;
-	}
-}
-
-int					mouse_press(int button, int x, int y, void *param)
-{
-	t_context 	*pctx;
-	t_complex 	p;
+	t_complex	p;
 	double		xp;
 	double		yp;
 
@@ -107,7 +50,7 @@ int					mouse_press(int button, int x, int y, void *param)
 	return (0);
 }
 
-void				mouse_press2(int button, double xp, double yp, t_context *pctx)
+void			mouse_press2(int button, double xp, double yp, t_context *pctx)
 {
 	if (button == MOUSE_UP)
 	{
@@ -117,7 +60,7 @@ void				mouse_press2(int button, double xp, double yp, t_context *pctx)
 		pctx->limit.y2 -= (pctx->limit.y2 - yp) / 10;
 		pctx->max_iteration += 2;
 	}
-	if (button == MOUSE_DOWN )
+	if (button == MOUSE_DOWN)
 	{
 		pctx->limit.x1 -= (xp - pctx->limit.x1) / 10;
 		pctx->limit.x2 += (pctx->limit.x2 - xp) / 10;
@@ -136,10 +79,10 @@ void				mouse_press2(int button, double xp, double yp, t_context *pctx)
 	}
 }
 
-int					mouse_move(int x, int y, void *param)
+int				mouse_move(int x, int y, void *param)
 {
-	t_context 	*pctx;
-	t_complex 	p;
+	t_context	*pctx;
+	t_complex	p;
 	double		xp;
 	double		yp;
 
@@ -165,7 +108,7 @@ int					mouse_move(int x, int y, void *param)
 	return (0);
 }
 
-int					closewindow(void *param)
+int				closewindow(void *param)
 {
 	t_context *pctx;
 

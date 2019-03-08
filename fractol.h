@@ -22,6 +22,8 @@
 # include <pthread.h>
 
 # define KEYCODE_ESC 53
+# define KEYCODE_I 34
+# define KEYCODE_O 31
 # define KEYCODE_Z 6
 # define KEYCODE_X 7
 # define KEYCODE_R 15
@@ -98,6 +100,11 @@ int					burningship_calcu(t_complex p, t_context *pctx);
 void				put_pixel_with_cl(double x, double y,
 	t_context *pctx, int iteration);
 void				key_press2(int keycode, t_context *pctx);
-void				mouse_press2(int button, double xp, double yp, t_context *pctx);
-
+void				mouse_press2(int button, double xp, double yp
+	, t_context *pctx);
+int					others(t_complex n, t_context *pctx);
+int					others2(t_complex n, t_context *pctx);
+int					others3(t_complex n, t_context *pctx);
+int					others4(t_complex n, t_context *pctx);
+int					switch_fractal(t_complex n, t_context *pctx);
 #endif
