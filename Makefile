@@ -34,7 +34,7 @@ $(NAME): $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE) $(LIBFTA) $(INC) -L minilibx_macos  -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c $(HEADER) $(LIBFTA)
-	$(CC) $(CFLAGS) -c $(SOURCE) $(INC)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INC)
 
 $(LIBFTA): FORCE
 	make -C ./libft
