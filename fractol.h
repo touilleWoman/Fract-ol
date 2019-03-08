@@ -38,7 +38,7 @@
 # define MOUSE_UP 5
 # define MOUSE_LEFT 1
 # define WIN_X 800
-# define WIN_Y 400
+# define WIN_Y 600
 # define WIN_NAME "fractol"
 
 typedef struct		s_complex
@@ -58,6 +58,8 @@ typedef struct		s_limit
 typedef struct		s_context
 {
 	t_limit			limit;
+	t_complex		julia;
+	t_complex		julia_tmp;
 	char			*data_a;
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -66,7 +68,7 @@ typedef struct		s_context
 	int				choose;
 	int				max_iteration;
 	int				variation_cl;
-	t_complex		julia;
+	int				stop_mouse;
 }					t_context;
 
 typedef struct		s_params
@@ -76,6 +78,8 @@ typedef struct		s_params
 	int				xmax;
 }					t_params;
 
+int					tricorn(t_complex n, t_context *pctx);
+int					julia2(t_complex n, t_context *pctx);
 int					choose_fractal(char *str, t_context *pctx);
 int					mouse_move(int x, int y, void *param);
 t_complex			normalize_pixel(int x, int y, t_context *pctx);
@@ -93,5 +97,7 @@ double				abs_double(double a);
 int					burningship_calcu(t_complex p, t_context *pctx);
 void				put_pixel_with_cl(double x, double y,
 	t_context *pctx, int iteration);
+void				key_press2(int keycode, t_context *pctx);
+void				mouse_press2(int button, double xp, double yp, t_context *pctx);
 
 #endif

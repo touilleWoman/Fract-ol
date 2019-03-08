@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-
 int					create_window(t_context *pctx)
 {
 	pctx->mlx_ptr = mlx_init();
@@ -107,6 +106,8 @@ void				sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 			pctx->choose == 1 ? i = mandelbrot_calcu(n, pctx) : pctx->choose;
 			pctx->choose == 2 ? i = julia_calcu(n, pctx) : pctx->choose;
 			pctx->choose == 3 ? i = burningship_calcu(n, pctx) : pctx->choose;
+			pctx->choose == 4 ? i = julia2(n, pctx) : pctx->choose;
+			pctx->choose == 5 ? i = tricorn(n, pctx) : pctx->choose;
 			if (i != pctx->max_iteration)
 				put_pixel_with_cl(x, y, pctx, i);
 			x++;

@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-t_complex	normalize_pixel(int x, int y, t_context *pctx)
+t_complex		normalize_pixel(int x, int y, t_context *pctx)
 {
 	t_complex	n;
 
@@ -21,7 +21,7 @@ t_complex	normalize_pixel(int x, int y, t_context *pctx)
 	return (n);
 }
 
-void		put_pixel_with_cl(double x, double y, t_context *pctx, int iter)
+void			put_pixel_with_cl(double x, double y, t_context *pctx, int iter)
 {
 	t_color		cl;
 	int			val_cl;
@@ -33,4 +33,9 @@ void		put_pixel_with_cl(double x, double y, t_context *pctx, int iter)
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;
 	pctx->data_a[i * 4] = cl.b;
+}
+
+double			abs_double(double a)
+{
+	return (a >= 0 ? a : -a);
 }
