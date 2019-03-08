@@ -92,7 +92,6 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.y1 += yd;
 		pctx->limit.y2 -= yd;
 		pctx->max_iteration += 2;
-
 	}
 
 	if (button == MOUSE_DOWN )
@@ -103,7 +102,6 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.y2 += yd;
 		if (pctx->max_iteration >= 50)
 			pctx->max_iteration -= 2;
-
 	}
 	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
 	ft_bzero(pctx->data_a, (pctx->size_l) * WIN_Y);
