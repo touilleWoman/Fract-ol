@@ -41,8 +41,8 @@ all: $(NAME)
 $(NAME): $(OFILE)
 	ar rcs $(NAME) $(OFILE)
 
-%.o: %.c $(HEADER) $(SOURCE)
-	$(CC) $(CFLAGS) -c $(SOURCE)
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	rm -f $(OFILE)
