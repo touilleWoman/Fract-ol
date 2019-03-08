@@ -12,21 +12,39 @@
 
 #include "fractol.h"
 
+
+int					create_window(t_context *pctx)
+{
+	pctx->mlx_ptr = mlx_init();
+	if (pctx->mlx_ptr == NULL)
+	{
+		ft_putendl_fd("mlx_init error", 2);
+		return (-1);
+	}
+	pctx->win_ptr = mlx_new_window(pctx->mlx_ptr, WIN_X, WIN_Y, WIN_NAME);
+	if (pctx->win_ptr == NULL)
+	{
+		ft_putendl_fd("mlx_new_window error", 2);
+		return (-1);
+	}
+	pctx->img_ptr = mlx_new_image(pctx->mlx_ptr, WIN_X, WIN_Y);
+	if (pctx->img_ptr == NULL)
+	{
+		ft_putendl_fd("mlx_new_image error", 2);
+		return (-1);
+	}
+	return (0);
+}
+
 int					window(t_context *pctx)
 {
 	int		bpp;
-	int		endian;
+	int		e;
 
 	reset(pctx);
-	pctx->mlx_ptr = mlx_init();
-	if (pctx->mlx_ptr == NULL)
+	if (create_window(pctx) == -1)
 		return (-1);
-	pctx->win_ptr = mlx_new_window(pctx->mlx_ptr, WIN_X, WIN_Y, WIN_NAME);
-	if (pctx->win_ptr == NULL)
-		return (-1);
-	pctx->img_ptr = mlx_new_image(pctx->mlx_ptr, WIN_X, WIN_Y);
-	pctx->data_a = mlx_get_data_addr(pctx->img_ptr, &bpp,
-		&pctx->size_l, &endian);
+	pctx->data_a = mlx_get_data_addr(pctx->img_ptr, &bpp, &pctx->size_l, &e);
 	thread(pctx);
 	mlx_hook(pctx->win_ptr, 2, 0, key_press, pctx);
 	mlx_hook(pctx->win_ptr, 17, 0, closewindow, pctx);
@@ -68,7 +86,7 @@ void				thread(t_context *pctx)
 		pthread_join(threads[i], NULL);
 		i++;
 	}
-	mlx_put_image_to_window(pctx->mlx_ptr,pctx->win_ptr, pctx->img_ptr, 0, 0);
+	mlx_put_image_to_window(pctx->mlx_ptr, pctx->win_ptr, pctx->img_ptr, 0, 0);
 }
 
 void				sub_browse_pixel(t_context *pctx, int xmin, int xmax)
@@ -81,7 +99,6 @@ void				sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 	y = 0;
 	i = 0;
 	x = xmin;
-
 	while (y < WIN_Y)
 	{
 		while (x < xmax)

@@ -15,7 +15,7 @@
 void				reset(t_context *pctx)
 {
 	pctx->variation_cl = 0;
-	pctx->limit.x2 = 1;
+	pctx->limit.x2 = 2;
 	pctx->limit.x1 = -2;
 	pctx->limit.y2 = 1;
 	pctx->limit.y1 = -1;

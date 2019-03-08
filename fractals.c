@@ -56,30 +56,29 @@ int				julia_calcu(t_complex n, t_context *pctx)
 	return (iteration);
 }
 
-
 int				burningship_calcu(t_complex n, t_context *pctx)
 {
-		t_complex	z;
-		t_complex	c;
-		int			iteration;
-		double		temp;
+	t_complex	z;
+	t_complex	c;
+	int			iteration;
+	double		temp;
 
-		c.re = n.re;
-		c.im = n.im;
-		iteration = 0;
-		z.re = 0;
-		z.im = 0;
-		while ((iteration < pctx->max_iteration) && (z.re * z.re + z.im * z.im < 4))
-		{
-			temp = z.re;
-			z.re = abs_double(z.re * z.re - z.im * z.im + c.re);
-			z.im = abs_double(2 * z.im * temp + c.im);
-			iteration++;
-		}
-		return(iteration);
+	c.re = n.re;
+	c.im = n.im;
+	iteration = 0;
+	z.re = 0;
+	z.im = 0;
+	while ((iteration < pctx->max_iteration) && (z.re * z.re + z.im * z.im < 4))
+	{
+		temp = z.re;
+		z.re = abs_double(z.re * z.re - z.im * z.im + c.re);
+		z.im = abs_double(2 * z.im * temp + c.im);
+		iteration++;
+	}
+	return (iteration);
 }
 
 double			abs_double(double a)
 {
-	return( a >= 0 ? a : -a);
+	return (a >= 0 ? a : -a);
 }

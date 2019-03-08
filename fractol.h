@@ -14,7 +14,7 @@
 # define FRACTOL_H
 
 # include "mlx.h"
-# include "./libft/libft.h"
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -29,24 +29,16 @@
 # define KEYCODE_DOWN 125
 # define KEYCODE_LEFT 123
 # define KEYCODE_RIGHT 124
-# define KEYCODE_Q 12
-# define KEYCODE_W 13
 # define KEYCODE_A 0
 # define KEYCODE_S 1
 # define KEYCODE_C 8
 # define KEYCODE_V 9
-# define KEYCODE_ONE 18
-# define KEYCODE_TWO 19
-# define KEYCODE_J 38
-# define KEYCODE_K 40
-# define KEYCODE_L 37
-# define KEYCODE_I 34
 # define MOUSE_RIGHT 2
 # define MOUSE_DOWN 4
 # define MOUSE_UP 5
 # define MOUSE_LEFT 1
 # define WIN_X 800
-# define WIN_Y 600
+# define WIN_Y 400
 # define WIN_NAME "fractol"
 
 typedef struct		s_complex
@@ -55,7 +47,7 @@ typedef struct		s_complex
 	double			im;
 }					t_complex;
 
-typedef struct 		s_limit
+typedef struct		s_limit
 {
 	double			x2;
 	double			x1;
@@ -77,13 +69,14 @@ typedef struct		s_context
 	t_complex		julia;
 }					t_context;
 
-typedef struct 		s_params
+typedef struct		s_params
 {
 	t_context		*pctx;
 	int				xmin;
 	int				xmax;
-} 					t_params;
+}					t_params;
 
+int					choose_fractal(char *str, t_context *pctx);
 int					mouse_move(int x, int y, void *param);
 t_complex			normalize_pixel(int x, int y, t_context *pctx);
 void				*start_routine(void *raw_params);

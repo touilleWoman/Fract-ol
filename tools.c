@@ -21,14 +21,14 @@ t_complex	normalize_pixel(int x, int y, t_context *pctx)
 	return (n);
 }
 
-void		put_pixel_with_cl(double x, double y, t_context *pctx, int iteration)
+void		put_pixel_with_cl(double x, double y, t_context *pctx, int iter)
 {
 	t_color		cl;
 	int			val_cl;
 	int			i;
 
 	i = y * WIN_X + x;
-	val_cl = iteration * 360 / pctx->max_iteration + pctx->variation_cl;
+	val_cl = iter * 360 / pctx->max_iteration + pctx->variation_cl;
 	cl = ft_color_val_calculate(val_cl);
 	pctx->data_a[i * 4 + 2] = cl.r;
 	pctx->data_a[i * 4 + 1] = cl.g;

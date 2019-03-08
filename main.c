@@ -18,25 +18,34 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putendl_fd("usage: ./fractol <fractal> (mandelbrot;julia)", 2);
+		ft_putendl_fd("usage: ./fractol <fractal>", 2);
+		ft_putendl_fd("available fractals: mandelbrot julia burningship", 2);
 		return (0);
 	}
-	if (ft_strcmp(argv[1], "mandelbrot") == 0)
-	{
-		ctx.choose = 1;
-		window(&ctx);
-	}
-	if (ft_strcmp(argv[1], "julia") == 0)
-	{
-		ctx.choose = 2;
-		window(&ctx);
-	}
-	if (ft_strcmp(argv[1], "burningship") == 0)
-	{
-		ctx.choose = 3;
-		window(&ctx);
-	}
-	else
+	if (choose_fractal(argv[1], &ctx) == 1)
 		ft_putendl_fd("fractal name wrong", 2);
-	return(0);
+	return (0);
+}
+
+int		choose_fractal(char *str, t_context *pctx)
+{
+	if (ft_strcmp(str, "mandelbrot") == 0)
+	{
+		pctx->choose = 1;
+		window(pctx);
+		return (0);
+	}
+	if (ft_strcmp(str, "julia") == 0)
+	{
+		pctx->choose = 2;
+		window(pctx);
+		return (0);
+	}
+	if (ft_strcmp(str, "burningship") == 0)
+	{
+		pctx->choose = 3;
+		window(pctx);
+		return (0);
+	}
+	return (1);
 }
