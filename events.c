@@ -81,8 +81,6 @@ int				mouse_press(int button, int x, int y, void *param)
 	p = normalize_pixel(x, y, pctx);
 	xp = p.re;
 	yp = p.im;
-	pctx->julia.re = xp;
-	pctx->julia.im = yp;
 
 	double xd = (pctx->limit.x2 - pctx->limit.x1) / 20;
 	double yd = (pctx->limit.y2 - pctx->limit.y1) / 20;
@@ -103,8 +101,8 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.x2 += xd;
 		pctx->limit.y1 -= yd;
 		pctx->limit.y2 += yd;
-		if (pctx->max_iteration >=60)
-			pctx->max_iteration = pctx->max_iteration - 2;
+		if (pctx->max_iteration >= 50)
+			pctx->max_iteration -= 2;
 
 	}
 	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
