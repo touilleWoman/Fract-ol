@@ -40,12 +40,12 @@ int					key_press(int keycode, void *param)
 	{
 		pctx->limit.x1 += xd;
 		pctx->limit.x2 += xd;
-	}		
+	}
 	if (keycode == KEYCODE_RIGHT)
 	{
 		pctx->limit.x1 -= xd;
 		pctx->limit.x2 -= xd;
-	}	
+	}
 
 	if (keycode == KEYCODE_UP)
 	{
@@ -92,7 +92,7 @@ int				mouse_press(int button, int x, int y, void *param)
 		pctx->limit.x1 += xd;
 		pctx->limit.x2 -= xd;
 		pctx->limit.y1 += yd;
-		pctx->limit.y2 -= yd;		
+		pctx->limit.y2 -= yd;
 		pctx->max_iteration += 2;
 
 	}
@@ -107,6 +107,24 @@ int				mouse_press(int button, int x, int y, void *param)
 			pctx->max_iteration = pctx->max_iteration - 2;
 
 	}
+	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
+	ft_bzero(pctx->data_a, (pctx->size_l) * WIN_Y);
+	thread(pctx);
+	return (0);
+}
+int				mouse_move(int x, int y, void *param)
+{
+	t_context 	*pctx;
+	t_complex 	p;
+	double		xp;
+	double		yp;
+
+	pctx = (t_context *)param;
+	p = normalize_pixel(x, y, pctx);
+	xp = p.re;
+	yp = p.im;
+	pctx->julia.re = xp;
+	pctx->julia.im = yp;
 	mlx_clear_window(pctx->mlx_ptr, pctx->win_ptr);
 	ft_bzero(pctx->data_a, (pctx->size_l) * WIN_Y);
 	thread(pctx);

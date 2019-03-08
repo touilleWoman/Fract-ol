@@ -47,12 +47,13 @@ int					window(t_context *pctx)
 	mlx_hook(pctx->win_ptr, 2, 0, key_press, pctx);
 	mlx_hook(pctx->win_ptr, 17, 0, closewindow, pctx);
 	mlx_hook(pctx->win_ptr, 4, 0, mouse_press, pctx);
+	mlx_hook(pctx->win_ptr, 6, 0, mouse_move, pctx);
 	mlx_loop(pctx->mlx_ptr);
 	return (0);
 
 }
 
-void			*start_routine(void *raw_params) 
+void			*start_routine(void *raw_params)
 {
 	t_params *params = (t_params*)raw_params;
 	sub_browse_pixel(params->pctx, params->xmin, params->xmax);
@@ -102,7 +103,7 @@ void			sub_browse_pixel(t_context *pctx, int xmin, int xmax)
 	{
 		while (x < xmax)
 		{
-			p = normalize_pixel(x, y, pctx);	
+			p = normalize_pixel(x, y, pctx);
 			if (pctx->choose == 1)
 				iteration = mandelbrot_calcu(p, pctx);
 			if (pctx->choose == 2)

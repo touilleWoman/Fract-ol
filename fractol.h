@@ -86,7 +86,8 @@ typedef struct 		s_params
 	int				xmin;
 	int				xmax;
 } 					t_params;
-	
+
+int				mouse_move(int x, int y, void *param);
 t_complex			normalize_pixel(int x, int y, t_context *pctx);
 void				*start_routine(void *raw_params);
 int					window(t_context *pctx);
@@ -99,7 +100,7 @@ int					julia_calcu(t_complex p, t_context *pctx);
 int					mandelbrot_calcu(t_complex p, t_context *pctx);
 void				thread(t_context *pctx);
 double				abs_double(double a);
-int				burningship_calcu(t_complex p, t_context *pctx);	
+int				burningship_calcu(t_complex p, t_context *pctx);
 
 
 
