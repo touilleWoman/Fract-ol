@@ -46,7 +46,6 @@ int					key_press(int keycode, void *param)
 		pctx->limit.x1 -= xd;
 		pctx->limit.x2 -= xd;
 	}
-
 	if (keycode == KEYCODE_UP)
 	{
 		pctx->limit.y1 += yd;
@@ -82,24 +81,51 @@ int				mouse_press(int button, int x, int y, void *param)
 	xp = p.re;
 	yp = p.im;
 
-	double xd = (pctx->limit.x2 - pctx->limit.x1) / 20;
-	double yd = (pctx->limit.y2 - pctx->limit.y1) / 20;
+	// double xd = (pctx->limit.x2 - pctx->limit.x1) / 20;
+	// double yd = (pctx->limit.y2 - pctx->limit.y1) / 20;
+	// double xmid = (pctx->limit.x2 - pctx->limit.x1) / 2;
+	// double ymid = (pctx->limit.y2 - pctx->limit.y1) / 2;
+
+	if (button == MOUSE_LEFT)
+	{
+		pctx->limit.x1 = pctx->limit.x1 * 0.8;
+		pctx->limit.x2 = pctx->limit.x2 * 0.8;
+		pctx->limit.y1 = pctx->limit.y1 * 0.8;
+		pctx->limit.y2 = pctx->limit.y2 * 0.8;
+		pctx->limit.x1 += xp * 0.8;
+		pctx->limit.x2 += xp * 0.8;
+		pctx->limit.y1 += yp * 0.8;
+		pctx->limit.y2 += yp * 0.8;
+		pctx->max_iteration += 2;
+	}
 	if (button == MOUSE_UP)
 	{
+		pctx->limit.x1 = pctx->limit.x1 * 0.8;
+		pctx->limit.x2 = pctx->limit.x2 * 0.8;
+		pctx->limit.y1 = pctx->limit.y1 * 0.8;
+		pctx->limit.y2 = pctx->limit.y2 * 0.8;
 
-		pctx->limit.x1 += xd;
-		pctx->limit.x2 -= xd;
-		pctx->limit.y1 += yd;
-		pctx->limit.y2 -= yd;
+		// pctx->limit.x1 += xd;
+		// pctx->limit.x2 -= xd;
+		// pctx->limit.y1 += yd;
+		// pctx->limit.y2 -=; yd
+		// pctx->limit.x1 = xp - xmid;
+		// pctx->limit.x2 = xp + xmid;
+		// pctx->limit.y1 = yp - ymid;
+		// pctx->limit.y2 = yp + ymid;
 		pctx->max_iteration += 2;
 	}
 
 	if (button == MOUSE_DOWN )
 	{
-		pctx->limit.x1 -= xd;
-		pctx->limit.x2 += xd;
-		pctx->limit.y1 -= yd;
-		pctx->limit.y2 += yd;
+		pctx->limit.x1 = pctx->limit.x1 * 1.25;
+		pctx->limit.x2 = pctx->limit.x2 * 1.25;
+		pctx->limit.y1 = pctx->limit.y1 * 1.25;
+		pctx->limit.y2 = pctx->limit.y2 * 1.25;
+		// pctx->limit.x1 -= xd;
+		// pctx->limit.x2 += xd;
+		// pctx->limit.y1 -= yd;
+		// pctx->limit.y2 += yd;
 		if (pctx->max_iteration >= 50)
 			pctx->max_iteration -= 2;
 	}

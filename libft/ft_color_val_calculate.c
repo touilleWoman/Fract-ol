@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 t_color				ft_color_val_calculate(int val_cl)
 {
 	t_color		cl;

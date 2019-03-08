@@ -41,15 +41,13 @@
 # define KEYCODE_K 40
 # define KEYCODE_L 37
 # define KEYCODE_I 34
-# define MOUSE_LEFT 1
-# define MOUSE_UP 4
-# define MOUSE_DOWN 5
+# define MOUSE_RIGHT 2
+# define MOUSE_DOWN 4
+# define MOUSE_UP 5
 # define MOUSE_LEFT 1
 # define WIN_X 800
 # define WIN_Y 600
 # define WIN_NAME "fractol"
-
-
 
 typedef struct		s_complex
 {
@@ -79,7 +77,6 @@ typedef struct		s_context
 	t_complex		julia;
 }					t_context;
 
-
 typedef struct 		s_params
 {
 	t_context		*pctx;
@@ -87,7 +84,7 @@ typedef struct 		s_params
 	int				xmax;
 } 					t_params;
 
-int				mouse_move(int x, int y, void *param);
+int					mouse_move(int x, int y, void *param);
 t_complex			normalize_pixel(int x, int y, t_context *pctx);
 void				*start_routine(void *raw_params);
 int					window(t_context *pctx);
@@ -100,8 +97,8 @@ int					julia_calcu(t_complex p, t_context *pctx);
 int					mandelbrot_calcu(t_complex p, t_context *pctx);
 void				thread(t_context *pctx);
 double				abs_double(double a);
-int				burningship_calcu(t_complex p, t_context *pctx);
-
-
+int					burningship_calcu(t_complex p, t_context *pctx);
+void				put_pixel_with_cl(double x, double y,
+	t_context *pctx, int iteration);
 
 #endif
